@@ -1,6 +1,7 @@
 use std::collections::HashMap;
 
-let kipling_if =
+pub fn poetry<'a>() -> HashMap<&'a str, HashMap<&'a str, &'a str>> {
+    let kipling_if =
 r"
 If you can keep your head when all about you   
     Are losing theirs and blaming it on you,   
@@ -39,7 +40,7 @@ Yours is the Earth and everything that’s in it,
     And—which is more—you’ll be a Man, my son!
 ";
 
-let w_h_auden_unkown_citizen = 
+    let w_h_auden_unkown_citizen = 
 r"
 He was found by the Bureau of Statistics to be
 One against whome there was no official complaint,
@@ -72,7 +73,7 @@ Was he free? Was he happy? The question is absurd:
 Had anything been wrong, we should certainly have heard.
 ";
 
-let percy_bysshe_shelley_ozymandias = 
+    let percy_bysshe_shelley_ozymandias = 
 r"
 I met a traveller from an antique land,
 Who said—“Two vast and trunkless legs of stone
@@ -90,6 +91,15 @@ Of that colossal Wreck, boundless and bare
 The lone and level sands stretch far away.
 ";
 
-pub fn poetry() -> Hashmap<&str, &str> {
-
+    [("kipling", [("if", kipling_if)]), 
+     ("w h auden", [("unkown citizen", w_h_auden_unkown_citizen)]),
+     ("percy bysshe shelley", [("ozymandias", percy_bysshe_shelley_ozymandias)])]
+        .iter()
+        .map(|(key, inner_map)| {
+            (*key, inner_map
+                    .iter()
+                    .cloned()
+                    .collect::<HashMap<&str, &str>>())
+        })
+        .collect()
 }
